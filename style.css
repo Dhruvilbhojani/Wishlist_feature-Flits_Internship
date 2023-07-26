@@ -1,0 +1,89 @@
+.div1 {
+  background-image: linear-gradient(to right, #1b0058, #320689);
+}
+
+* {
+    transition: 1s ease-in;
+}
+
+a {
+  /* color: white !important; */
+  text-decoration: none !important;
+}
+
+input::placeholder {
+  color: white !important;
+}
+
+input:focus {
+  border: 1px solid black;
+}
+
+.text-white {
+  color: white !important;
+}
+.text-black {
+  color: black !important;
+  fill: black !important;
+}
+
+.addToCart {
+  background-color: #2e94b1;
+  color: white;
+}
+
+.addToCart:hover {
+  color: white;
+  background-color: #29839d;
+}
+
+.container {
+    width: 80%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  /* Media queries to adjust the container width for different screen sizes */
+  @media (min-width: 576px) {
+    .container {
+      max-width: 540px;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .container {
+      max-width: 720px;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .container {
+      max-width: 960px;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .container {
+      max-width: 1140px;
+    }
+  }
+  
+.wrapper{
+    padding: 5vh;
+}
+
+    /* Default style: Center the reviews for small screens */
+    .personal-reviews {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* Media query for large screens (adjust the max-width value as needed) */
+    @media (min-width: 768px) {
+        .personal-reviews {
+            justify-content: space-between; /* Change to flex-start for left alignment */
+        }
+    }
