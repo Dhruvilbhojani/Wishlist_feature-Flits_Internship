@@ -2,10 +2,6 @@
   background-image: linear-gradient(to right, #1b0058, #320689);
 }
 
-* {
-    transition: 1s ease-in;
-}
-
 a {
   /* color: white !important; */
   text-decoration: none !important;
@@ -38,52 +34,62 @@ input:focus {
 }
 
 .container {
-    width: 80%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-  
-  /* Media queries to adjust the container width for different screen sizes */
-  @media (min-width: 576px) {
-    .container {
-      max-width: 540px;
-    }
-  }
-  
-  @media (min-width: 768px) {
-    .container {
-      max-width: 720px;
-    }
-  }
-  
-  @media (min-width: 992px) {
-    .container {
-      max-width: 960px;
-    }
-  }
-  
-  @media (min-width: 1200px) {
-    .container {
-      max-width: 1140px;
-    }
-  }
-  
-.wrapper{
-    padding: 5vh;
+  width: 80%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
-    /* Default style: Center the reviews for small screens */
-    .personal-reviews {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+/* Media queries to adjust the container width for different screen sizes */
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
 
-    /* Media query for large screens (adjust the max-width value as needed) */
-    @media (min-width: 768px) {
-        .personal-reviews {
-            justify-content: space-between; /* Change to flex-start for left alignment */
-        }
-    }
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+.wrapper {
+  padding: 5vh;
+}
+
+/* Default style: Center the reviews for small screens */
+.personal-reviews {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Media query for large screens (adjust the max-width value as needed) */
+@media (min-width: 768px) {
+  .personal-reviews {
+    justify-content: space-between; /* Change to flex-start for left alignment */
+  }
+}
+
+.svg-container {
+  position: relative;
+}
+.svg-container svg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
