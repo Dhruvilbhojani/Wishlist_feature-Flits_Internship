@@ -7,6 +7,10 @@
     <title>Alarm Clock - Flits-Demo-2</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="./style.css">
 </head>
 
@@ -15,10 +19,10 @@
 
         <nav class="div1 pt-3">
             <div class="container">
-                <div class="row row-cols-2 m-0" style="width: 100%;">
+                <div class="row row-cols-2 m-0 p-0" style="width: 100%;">
                     <!-- Flits Logo -->
                     <div class="col mx-auto d-sm-flex d-md-block justify-content-center">
-                        <div class="p-3 ">
+                        <div class="p-3">
                             <a class="" href="#">
                                 <img src="./res/GLYPHS_1_180x.avif" height="50vh">
                             </a>
@@ -207,7 +211,8 @@
                             </select>
                         </div>
                         <div class="add-to-cart pt-2 d-grid">
-                            <button type="button" class="addToCart btn btn-outline-secondary full-width text-center">
+                            <button type="button" id="addToCart"
+                                class="addToCart btn btn-outline-secondary full-width text-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-cart" viewBox="0 3 16 16">
                                     <path
@@ -731,6 +736,13 @@
             </div>
         </footer>
     </main>
+    
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="./wishlist.js"></script>
 </body>
 
 </html>
