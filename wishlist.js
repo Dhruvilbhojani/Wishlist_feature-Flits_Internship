@@ -103,7 +103,6 @@ document.addEventListener("DOMContentLoaded", function () {
   if (flits !== null) {
     btn.classList.add("email-added-once");
     if (flits.flits_wishlist_products !== "") {
-      console.log(flits.flits_wishlist_products);
       btn.classList.add("added");
       btn.style.backgroundColor = "#230268";
       btn.classList.remove("text-black");
@@ -112,12 +111,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  btn.addEventListener("click", function () {
+  btn.addEventListener("click", async function () {
     if (
       !btn.classList.contains("email-added-once") &&
       !btn.classList.contains("added")
     ) {
-      console.log("Email not added, product not added");
       var modal = document.createElement("div");
       modal.classList.add("modal", "fade");
       modal.setAttribute("id", "exampleModalCenter");
@@ -189,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       $(modal).modal("show");
 
-      emailModalButton.addEventListener("click", function () {
+      emailModalButton.addEventListener("click", async function () {
         var email = document
           .getElementsByClassName("emailInput")[0]
           .value.trim();
@@ -279,12 +277,31 @@ document.addEventListener("DOMContentLoaded", function () {
             btn.classList.remove("text-black");
             btn.classList.add("text-white", "added", "email-added-once");
 
+            var data = {
+              customer_hash: "",
+              token: "",
+              customer_id: "",
+              customer_email: email,
+              product_id: "",
+              product_handle: "table-clock",
+              product_title: "Alarm Clock",
+              product_image: "",
+              wsl_product_count: 1,
+            };
+
+            try {
+              await fetch("https://tempapi.proj.me/api/QGs7adpr5")
+                .then((res) => console.log(res))
+                .catch((err) => console.log("Errorrrrr"));
+            } catch (error) {
+              console.error("Error sending data to API:", error);
+            }
+
             toastAdded();
           }
         }
       });
     } else if (btn.classList.contains("added")) {
-      console.log("Email and Product added");
       if (localStorage) {
         var storedFlits = JSON.parse(localStorage.getItem("flits"));
         if (storedFlits !== null) {
@@ -299,9 +316,17 @@ document.addEventListener("DOMContentLoaded", function () {
       btn.classList.add("text-black");
       btn.classList.remove("text-white", "added");
       btn.innerHTML = svg + "ADD TO WISHLIST";
+
+      try {
+        await fetch("https://tempapi.proj.me/api/nH_E81_f9")
+          .then((res) => console.log(res))
+          .catch((err) => console.log("Errorrrrr"));
+      } catch (error) {
+        console.error("Error sending data to API:", error);
+      }
+
       toastRemovedProduct();
     } else {
-      console.log("Email added, product not added");
       if (localStorage) {
         var storedFlits = JSON.parse(localStorage.getItem("flits"));
         if (storedFlits !== null) {
@@ -311,6 +336,27 @@ document.addEventListener("DOMContentLoaded", function () {
           btn.classList.remove("text-black");
           btn.classList.add("text-white", "added");
           btn.innerHTML = svgFilledHeart + "ADDED TO WISHLIST";
+
+          var data = {
+            customer_hash: "",
+            token: "",
+            customer_id: "",
+            customer_email: "email",
+            product_id: "",
+            product_handle: "table-clock",
+            product_title: "Alarm Clock",
+            product_image: "",
+            wsl_product_count: "1",
+          };
+
+          try {
+            await fetch("https://tempapi.proj.me/api/QGs7adpr5")
+              .then((res) => console.log(res))
+              .catch((err) => console.log("Errorrrrr"));
+          } catch (error) {
+            console.error("Error sending data to API:", error);
+          }
+
           toastAdded();
         } else {
           btn.classList.remove("email-added-once");
