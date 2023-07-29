@@ -73,134 +73,154 @@ function toastRemovedProduct() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  var btn = document.createElement("button");
-  var svg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+  if (localStorage) {
+    var btn = document.createElement("button");
+    var svg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
   <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
   </svg>`;
-  var svgFilledHeart = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+    var svgFilledHeart = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
   </svg>`;
-  btn.innerHTML = svg + "ADD TO WISHLIST";
-  btn.classList.add(
-    "border-1",
-    "text-black",
-    "bg-trasparent",
-    "mt-2",
-    "btn",
-    "btn-outline-secondary"
-  );
-  var addToCart = document.getElementById("addToCart");
-  var parentElement = addToCart.parentNode;
+    btn.innerHTML = svg + "ADD TO WISHLIST";
+    btn.classList.add(
+      "border-1",
+      "text-black",
+      "bg-trasparent",
+      "mt-2",
+      "btn",
+      "btn-outline-secondary"
+    );
+    var addToCart = document.getElementById("addToCart");
+    var parentElement = addToCart.parentNode;
 
-  var nextSibling = addToCart.nextSibling;
+    var nextSibling = addToCart.nextSibling;
 
-  if (nextSibling) {
-    parentElement.insertBefore(btn, nextSibling);
-  } else {
-    parentElement.appendChild(btn);
-  }
-  var flits = JSON.parse(localStorage.getItem("flits"));
-  if (flits !== null) {
-    btn.classList.add("email-added-once");
-    if (flits.flits_wishlist_products !== "") {
-      btn.classList.add("added");
-      btn.style.backgroundColor = "#230268";
-      btn.classList.remove("text-black");
-      btn.classList.add("text-white", "added");
-      btn.innerHTML = svgFilledHeart + "ADDED TO WISHLIST";
+    if (nextSibling) {
+      parentElement.insertBefore(btn, nextSibling);
+    } else {
+      parentElement.appendChild(btn);
     }
-  }
+    var flits = JSON.parse(localStorage.getItem("flits"));
+    if (flits !== null) {
+      btn.classList.add("email-added-once");
+      if (flits.flits_wishlist_products == "table-clock") {
+        btn.classList.add("added");
+        btn.style.backgroundColor = "#230268";
+        btn.classList.remove("text-black");
+        btn.classList.add("text-white", "added");
+        btn.innerHTML = svgFilledHeart + "ADDED TO WISHLIST";
+      }
+    }
 
-  btn.addEventListener("click", async function () {
-    if (
-      !btn.classList.contains("email-added-once") &&
-      !btn.classList.contains("added")
-    ) {
-      var modal = document.createElement("div");
-      modal.classList.add("modal", "fade");
-      modal.setAttribute("id", "exampleModalCenter");
-      modal.setAttribute("tabindex", "-1");
-      modal.setAttribute("role", "dialog");
-      modal.setAttribute("aria-labelledby", "exampleModalCenterTitle");
-      modal.setAttribute("aria-hidden", "true");
+    btn.addEventListener("click", async function () {
+      if (
+        !btn.classList.contains("email-added-once") &&
+        !btn.classList.contains("added")
+      ) {
+        var modal = document.createElement("div");
+        modal.classList.add("modal", "fade");
+        modal.setAttribute("id", "exampleModalCenter");
+        modal.setAttribute("tabindex", "-1");
+        modal.setAttribute("role", "dialog");
+        modal.setAttribute("aria-labelledby", "exampleModalCenterTitle");
+        modal.setAttribute("aria-hidden", "true");
 
-      var modalDialog = document.createElement("div");
-      modalDialog.classList.add("modal-dialog", "modal-dialog-centered");
-      modalDialog.setAttribute("role", "document");
+        var modalDialog = document.createElement("div");
+        modalDialog.classList.add("modal-dialog", "modal-dialog-centered");
+        modalDialog.setAttribute("role", "document");
 
-      var modalContent = document.createElement("div");
-      modalContent.classList.add("modal-content");
+        var modalContent = document.createElement("div");
+        modalContent.classList.add("modal-content");
 
-      var modalHeader = document.createElement("div");
-      modalHeader.classList.add(
-        "modal-header",
-        "text-center",
-        "justify-content-center"
-      );
+        var modalHeader = document.createElement("div");
+        modalHeader.classList.add("modal-header", "justify-content-center");
+        var closeBtn = document.createElement("button");
+        closeBtn.innerHTML = "X";
+        closeBtn.classList.add(
+          "position-absolute",
+          "bg-transparent",
+          "border-0",
+          "text-secondary",
+          "top-0",
+          "end-0",
+          "p-3",
+          "pt-2"
+        );
+        closeBtn.addEventListener("click", function () {
+          $(modal).modal("hide");
+        });
 
-      var modalTitle = document.createElement("h5");
-      modalTitle.classList.add("modal-title");
-      modalTitle.setAttribute("id", "exampleModalCenterTitle");
-      modalTitle.innerHTML = "WHAT's YOUR EMAIL?";
+        var modalTitle = document.createElement("h5");
+        modalTitle.classList.add("modal-title");
+        modalTitle.setAttribute("id", "exampleModalCenterTitle");
+        modalTitle.innerHTML = "WHAT's YOUR EMAIL?";
 
-      var modalBody = document.createElement("div");
-      modalBody.classList.add("modal-body", "justify-content-center");
+        var modalBody = document.createElement("div");
+        modalBody.classList.add("modal-body", "justify-content-center");
 
-      var center = document.createElement("center");
+        var center = document.createElement("center");
 
-      var emailInput = document.createElement("input");
-      emailInput.classList.add("border-0", "emailInput", "p-2");
-      emailInput.setAttribute("type", "email");
-      emailInput.setAttribute("placeholder", "Email Address");
-      emailInput.setAttribute(
-        "style",
-        "background-color: #dddddd;width: -webkit-fill-available;"
-      );
+        var emailInput = document.createElement("input");
+        emailInput.classList.add("border-0", "emailInput", "p-2");
+        emailInput.setAttribute("type", "email");
+        emailInput.setAttribute("placeholder", "Email Address");
+        emailInput.setAttribute(
+          "style",
+          "background-color: #dddddd;width: -webkit-fill-available;"
+        );
 
-      var modalFooter = document.createElement("div");
-      modalFooter.classList.add("modal-footer", "justify-content-center");
+        var modalFooter = document.createElement("div");
+        modalFooter.classList.add("modal-footer", "justify-content-center");
 
-      var emailModalButton = document.createElement("button");
-      emailModalButton.classList.add("btn", "rounded-0");
-      emailModalButton.setAttribute(
-        "style",
-        "background-color: rgb(12, 33, 84); color: white;"
-      );
-      emailModalButton.setAttribute("type", "button");
-      emailModalButton.setAttribute("data-dismiss", "modal");
-      emailModalButton.textContent = "Add to Wishlist";
+        var emailModalButton = document.createElement("button");
+        emailModalButton.classList.add("btn", "rounded-0");
+        emailModalButton.setAttribute(
+          "style",
+          "background-color: rgb(12, 33, 84); color: white;"
+        );
+        emailModalButton.setAttribute("type", "button");
+        emailModalButton.setAttribute("data-dismiss", "modal");
+        emailModalButton.textContent = "Add to Wishlist";
 
-      modalHeader.appendChild(modalTitle);
-      modalBody.appendChild(center);
-      center.appendChild(emailInput);
-      modalFooter.appendChild(emailModalButton);
-      modalContent.appendChild(modalHeader);
-      modalContent.appendChild(modalBody);
-      modalContent.appendChild(modalFooter);
-      modalDialog.appendChild(modalContent);
-      modal.appendChild(modalDialog);
+        modalHeader.appendChild(modalTitle);
+        modalBody.appendChild(center);
+        center.appendChild(emailInput);
+        modalFooter.appendChild(emailModalButton);
+        modalContent.appendChild(closeBtn);
+        modalContent.appendChild(modalHeader);
+        modalContent.appendChild(modalBody);
+        modalContent.appendChild(modalFooter);
+        modalDialog.appendChild(modalContent);
+        modal.appendChild(modalDialog);
 
-      var style = document.createElement("style");
-      style.innerHTML =
-        ".emailInput::placeholder {color: gray !important;} .emailIput{color:red;}";
-      document.head.appendChild(style);
+        var style = document.createElement("style");
+        style.innerHTML =
+          ".emailInput::placeholder {color: gray !important;} .emailIput{color:red;}";
+        document.head.appendChild(style);
 
-      $(modal).modal("show");
+        $(modal).modal("show");
 
-      emailModalButton.addEventListener("click", async function () {
-        var email = document
-          .getElementsByClassName("emailInput")[0]
-          .value.trim();
-        var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        if (!emailPattern.test(email)) {
-          alert("Enter valid Email Address");
-        } else {
-          if (localStorage) {
+        emailModalButton.addEventListener("click", async function () {
+          var email = document
+            .getElementsByClassName("emailInput")[0]
+            .value.trim();
+          var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+          if (!emailPattern.test(email)) {
+            alert("Enter valid Email Address");
+          } else {
             var flits = {};
             flits.flits_customer_email = email;
             flits.flits_wishlist_products = "table-clock";
-            // Employee_.City = $("#txtCity").val();
             localStorage.setItem("flits", JSON.stringify(flits));
+
+            try {
+              await fetch("https://tempapi.proj.me/api/QGs7adpr5")
+                .then((res) => console.log(res))
+                .catch((err) => console.log("Errorrrrr"));
+            } catch (error) {
+              console.error("Error sending data to API:", error);
+            }
+
             modal.removeChild(modalDialog);
             var modalDialog2 = document.createElement("div");
             modalDialog2.classList.add("modal-dialog", "modal-dialog-centered");
@@ -266,6 +286,7 @@ document.addEventListener("DOMContentLoaded", function () {
             center.appendChild(p2);
             modalFooter2.appendChild(Login);
             modalFooter2.appendChild(Register);
+            modalContent2.appendChild(closeBtn);
             modalContent2.appendChild(modalHeader2);
             modalContent2.appendChild(modalBody2);
             modalContent2.appendChild(modalFooter2);
@@ -277,77 +298,41 @@ document.addEventListener("DOMContentLoaded", function () {
             btn.classList.remove("text-black");
             btn.classList.add("text-white", "added", "email-added-once");
 
-            var data = {
-              customer_hash: "",
-              token: "",
-              customer_id: "",
-              customer_email: email,
-              product_id: "",
-              product_handle: "table-clock",
-              product_title: "Alarm Clock",
-              product_image: "",
-              wsl_product_count: 1,
-            };
-
-            try {
-              await fetch("https://tempapi.proj.me/api/QGs7adpr5")
-                .then((res) => console.log(res))
-                .catch((err) => console.log("Errorrrrr"));
-            } catch (error) {
-              console.error("Error sending data to API:", error);
-            }
-
             toastAdded();
           }
-        }
-      });
-    } else if (btn.classList.contains("added")) {
-      if (localStorage) {
-        var storedFlits = JSON.parse(localStorage.getItem("flits"));
-        if (storedFlits !== null) {
-          storedFlits.flits_wishlist_products = "";
-          localStorage.setItem("flits", JSON.stringify(storedFlits));
+        });
+      } else if (btn.classList.contains("added")) {
+        var flits = JSON.parse(localStorage.getItem("flits"));
+        if (flits !== null) {
+          flits.flits_wishlist_products = "";
+          localStorage.setItem("flits", JSON.stringify(flits));
         } else {
-          btn.classList.remove("added", "email-added-once");
+          btn.classList.remove("added");
         }
-      }
-      btn.style.color = "#230268";
-      btn.style.backgroundColor = "transparent";
-      btn.classList.add("text-black");
-      btn.classList.remove("text-white", "added");
-      btn.innerHTML = svg + "ADD TO WISHLIST";
+        btn.style.color = "#230268";
+        btn.style.backgroundColor = "transparent";
+        btn.classList.add("text-black");
+        btn.classList.remove("text-white", "added");
+        btn.innerHTML = svg + "ADD TO WISHLIST";
 
-      try {
-        await fetch("https://tempapi.proj.me/api/nH_E81_f9")
-          .then((res) => console.log(res))
-          .catch((err) => console.log("Errorrrrr"));
-      } catch (error) {
-        console.error("Error sending data to API:", error);
-      }
+        try {
+          await fetch("https://tempapi.proj.me/api/nH_E81_f9")
+            .then((res) => console.log(res))
+            .catch((err) => console.log("Errorrrrr"));
+        } catch (error) {
+          console.error("Error sending data to API:", error);
+        }
 
-      toastRemovedProduct();
-    } else {
-      if (localStorage) {
-        var storedFlits = JSON.parse(localStorage.getItem("flits"));
-        if (storedFlits !== null) {
-          storedFlits.flits_wishlist_products = "table-clock";
-          localStorage.setItem("flits", JSON.stringify(storedFlits));
+        toastRemovedProduct();
+      } else {
+        var flits = JSON.parse(localStorage.getItem("flits"));
+        if (flits !== null) {
+          flits.flits_wishlist_products = "table-clock";
+          localStorage.setItem("flits", JSON.stringify(flits));
           btn.style.backgroundColor = "#230268";
           btn.classList.remove("text-black");
           btn.classList.add("text-white", "added");
           btn.innerHTML = svgFilledHeart + "ADDED TO WISHLIST";
-
-          var data = {
-            customer_hash: "",
-            token: "",
-            customer_id: "",
-            customer_email: "email",
-            product_id: "",
-            product_handle: "table-clock",
-            product_title: "Alarm Clock",
-            product_image: "",
-            wsl_product_count: "1",
-          };
 
           try {
             await fetch("https://tempapi.proj.me/api/QGs7adpr5")
@@ -362,6 +347,6 @@ document.addEventListener("DOMContentLoaded", function () {
           btn.classList.remove("email-added-once");
         }
       }
-    }
-  });
+    });
+  }
 });
