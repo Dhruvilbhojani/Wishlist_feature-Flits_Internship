@@ -93,3 +93,19 @@ input:focus {
   right: 0;
   margin: auto;
 }
+
+.text-gray {
+  color: #585858;
+}
+
+.loginEmail,
+.loginPass {
+  border: lightgray 1px solid;
+  width: calc(100vw-0vh);
+  font-size: 14px;
+  color: #585858;
+}
+
+.socialLogin{
+  max-width: 100px;
+}
