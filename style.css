@@ -101,11 +101,18 @@ input:focus {
 .loginEmail,
 .loginPass {
   border: lightgray 1px solid;
-  width: calc(100vw-0vh);
+  width: 50%;
   font-size: 14px;
   color: #585858;
 }
 
-.socialLogin{
+@media (max-width: 500px) {
+  .loginEmail,
+  .loginPass {
+    width: 90%;
+  }
+}
+
+.socialLogin {
   max-width: 100px;
 }
