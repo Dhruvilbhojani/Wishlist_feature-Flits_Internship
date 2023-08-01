@@ -11,8 +11,21 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- <script src="https://www.google.com/recaptcha/api.js?render=6LdJLXEnAAAAAN4pFkJ044lAGJhHsdRHUgg8_PwF"></script> -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <script type="text/javascript">
+        var verifyCallback = function (response) {
+            console.log(response);
+        };
+        var onloadCallback = function () {
+            grecaptcha.render('example3', {
+                'sitekey': '6LdJLXEnAAAAAN4pFkJ044lAGJhHsdRHUgg8_PwF',
+                'callback': verifyCallback,
+                'theme': 'light'
+            });
+        };
+    </script>
 </head>
 
 <body>
@@ -133,44 +146,19 @@
         </div>
     </nav>
     <div class="wrapper">
-        <div class="text-center py-4 container text-gray" style="font-size: 0.7rem; background-color: #f7f7f7;">
-            <p>
-                <b>Testing user for this store</b>
-            </p>
-            <p>
-                <b>Username: </b> james@getflits.com
-            </p>
-            <p>
-                <b>Password: </b> wnsyNVq8csaRguQ4VwVs
-            </p>
-            <p>
-                <b>
-                    You can use this demo user to test how FLITS works.
-                </b>
-            </p>
-            <p>
-                <b>
-                    *Dear Customer Please don't change the Login details of the user ID - james@getflits.com as it is a
-                    common login ID for many testers. </b>
-            </p>
-            <button class="text-white border-0 px-3 py-2"
-                style="background-color: #1b0058; font-size: 0.8rem; border-radius: 2px;">INSTALL FLITS</button>
-        </div>
+
 
         <div class="login mt-4 text-center">
-            <b>
-                <h4 class="m-4">LOGIN</h4>
-            </b>
+            <p class="text-gray" style="font-size: 0.7rem;">
+                To continue, let us know you're not a robot.
+            </p>
 
             <form action="./challange.html" id="loginForm">
-                <input type="text" class="loginEmail text-gray rounded-1 m-1 py-2 mb-3 px-3" name="email" id="email"
-                    value="james@getflits.com"><br>
-                <input type="password" class="loginPass rounded-1 py-2 mb-3 px-3 text-gray" name="password"
-                    id="password" value="wnsyNVq8csaRguQ4VwVs"><br>
-                <a class="m-5" href="#" style="color: #2e94b1;">Forget your password?</a><br>
+                <center>
+                    <div class="float-center" id="example3"></div>
+                </center>
                 <button type="submit" class="px-3 py-2 mt-3 border-0 text-white"
-                    style="background-color: #2e94b1; font-size: 0.8rem; border-radius: 3px;">SIGN IN</button><br>
-                <p class="mt-3">or <a href="#" style="color: #2e94b1;">Return to Store</a></p>
+                    style="background-color: #2e94b1; font-size: 0.8rem; border-radius: 3px;">SUBMIT</button><br>
             </form>
         </div>
     </div>
@@ -349,7 +337,8 @@
         </div>
     </footer>
     <script src="./cart.js"></script>
-    <script src="./social.js"></script>
+
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
     </script>
 
 </body>
