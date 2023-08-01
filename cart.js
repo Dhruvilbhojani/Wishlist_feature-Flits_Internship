@@ -16,7 +16,6 @@ if (addToCart) {
           flits.flits_cart = "Clock";
           flits.flits_product_count = 1;
           localStorage.setItem("flits", JSON.stringify(flits));
-          console.log("Not null");
         }
       } else {
         var flits = {};
@@ -29,6 +28,7 @@ if (addToCart) {
 }
 
 function cartFunction() {
+  var flits;
   if (localStorage) {
     var flits = JSON.parse(localStorage.getItem("flits"));
   }
@@ -106,7 +106,14 @@ function cartFunction() {
   var txt = document.createElement("button");
   txt.classList.add("btn", "btn-outline-secondary");
   txt.setAttribute("disabled", "");
-  txt.innerHTML = flits.flits_product_count;
+  if (flits) {
+    if (flits.flits_product_count == null) {
+      txt.innerHTML = "0";
+    } else txt.innerHTML = flits.flits_product_count;
+  } else {
+    txt.innerHTML = "0";
+  }
+
   var cp = document.createElement("button");
   cp.classList.add("btn", "btn-outline-secondary");
   cp.innerHTML = "+";
@@ -133,10 +140,19 @@ function cartFunction() {
 
   var total = document.createElement("div");
   total.classList.add("text-gray", "text-end");
-  total.innerHTML =
-    "<p>Subtotal <b>Rs. " +
-    (450.0 * flits.flits_product_count).toFixed(2) +
-    "</b></p>";
+
+  if (flits) {
+    if (flits.flits_product_count == null) {
+      total.innerHTML == "0";
+    } else {
+      total.innerHTML =
+        "<p>Subtotal <b>Rs. " +
+        (450.0 * flits.flits_product_count).toFixed(2) +
+        "</b></p>";
+    }
+  } else {
+    total.innerHTML == "0";
+  }
 
   var tax = document.createElement("div");
   tax.classList.add("text-gray", "fst-italic", "fw-medium", "text-end");
@@ -152,10 +168,19 @@ function cartFunction() {
   option1.innerHTML = "Select option to use store Credits:";
   var option2 = document.createElement("option");
   option2.setAttribute("value", "2");
-  option2.innerHTML =
-    "You can use Rs." +
-    (450 * flits.flits_product_count * 15) / 100 +
-    " credit out of Rs. 1,800.96";
+
+  if (flits) {
+    if (flits.flits_product_count == null) {
+      // txt.innerHTML = "0";
+    } else {
+      option2.innerHTML =
+        "You can use Rs." +
+        (450 * flits.flits_product_count * 15) / 100 +
+        " credit out of Rs. 1,800.96";
+    }
+  } else {
+    // txt.innerHTML = "0";
+  }
 
   var checkoutBtn = document.createElement("button");
   checkoutBtn.classList.add("btn", "ms-3");
@@ -166,7 +191,6 @@ function cartFunction() {
   //   checkoutBtn.style.height = "3rem";
 
   cm.addEventListener("click", function () {
-    console.log("clicked");
     flits.flits_product_count--;
     if (flits.flits_product_count == 0) {
       modalContent.removeChild(modalFooter);
@@ -185,7 +209,6 @@ function cartFunction() {
     localStorage.setItem("flits", JSON.stringify(flits));
   });
   cp.addEventListener("click", function () {
-    console.log("clicked");
     flits.flits_product_count++;
     txt.innerHTML = flits.flits_product_count;
     total.innerHTML =
@@ -224,9 +247,15 @@ function cartFunction() {
   modalFooter.appendChild(btns);
   modalContent.appendChild(closeBtn);
   modalContent.appendChild(modalHeader);
-  if (flits.flits_product_count !== 0) {
-    modalContent.appendChild(modalBody);
-    modalContent.appendChild(modalFooter);
+  if (flits) {
+    if (flits.flits_product_count > 0 && flits.flits_product_count !== null) {
+
+      modalContent.appendChild(modalBody);
+      modalContent.appendChild(modalFooter);
+    } else {
+      modalBody.innerHTML = "Continue browsing here...";
+      modalContent.appendChild(modalBody);
+    }
   } else {
     modalBody.innerHTML = "Continue browsing here...";
     modalContent.appendChild(modalBody);

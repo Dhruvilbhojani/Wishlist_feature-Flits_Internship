@@ -104,9 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
     btn.addEventListener("click", async function () {
       var flits = JSON.parse(localStorage.getItem("flits"));
       if (flits !== null) {
-        if (flits.flits_customer_email == null) {
-          console.log("NO EMAIL FOUND!!");
-        } else {
+        if (!(flits.flits_customer_email == null)) {
           btn.classList.add("email-added-once");
         }
         if (flits.flits_wishlist_products == "table-clock") {
@@ -248,13 +246,9 @@ document.addEventListener("DOMContentLoaded", function () {
           if (!emailPattern.test(email)) {
             alert("Enter valid Email Address");
           } else {
-            //************************************** */
             var flits = {};
             if (localStorage.getItem("flits")) {
               flits = JSON.parse(localStorage.getItem("flits"));
-              console.log("Having");
-            } else {
-              console.log("NOT HACING");
             }
             flits.flits_customer_email = email;
             flits.flits_wishlist_products = "table-clock";
