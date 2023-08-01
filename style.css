@@ -7,7 +7,7 @@ a {
   text-decoration: none !important;
 }
 
-input::placeholder {
+.search::placeholder {
   color: white !important;
 }
 
@@ -99,20 +99,39 @@ input:focus {
 }
 
 .loginEmail,
-.loginPass {
+.loginPass,
+.registerFname,
+.registerPass,
+.registerEmail,
+.registerLname,
+.registerPAN {
   border: lightgray 1px solid;
   width: 50%;
   font-size: 14px;
   color: #585858;
 }
 
+.PAN {
+  width: 50%;
+  text-align: start;
+}
 @media (max-width: 500px) {
   .loginEmail,
-  .loginPass {
+  .loginPass,
+  .registerFname,
+  .registerPass,
+  .registerEmail,
+  .registerLname,
+  .registerPAN {
     width: 90%;
+  }
+  .PAN {
+    width: 90%;
+    text-align: start;
   }
 }
 
 .socialLogin {
   max-width: 100px;
 }
+

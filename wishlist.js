@@ -100,19 +100,23 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       parentElement.appendChild(btn);
     }
-    var flits = JSON.parse(localStorage.getItem("flits"));
-    if (flits !== null) {
-      btn.classList.add("email-added-once");
-      if (flits.flits_wishlist_products == "table-clock") {
-        btn.classList.add("added");
-        btn.style.backgroundColor = "#230268";
-        btn.classList.remove("text-black");
-        btn.classList.add("text-white", "added");
-        btn.innerHTML = svgFilledHeart + "ADDED TO WISHLIST";
-      }
-    }
 
     btn.addEventListener("click", async function () {
+      var flits = JSON.parse(localStorage.getItem("flits"));
+      if (flits !== null) {
+        if (flits.flits_customer_email == null) {
+          console.log("NO EMAIL FOUND!!");
+        } else {
+          btn.classList.add("email-added-once");
+        }
+        if (flits.flits_wishlist_products == "table-clock") {
+          btn.classList.add("added");
+          btn.style.backgroundColor = "#230268";
+          btn.classList.remove("text-black");
+          btn.classList.add("text-white", "added");
+          btn.innerHTML = svgFilledHeart + "ADDED TO WISHLIST";
+        }
+      }
       if (
         !btn.classList.contains("email-added-once") &&
         !btn.classList.contains("added")
@@ -244,7 +248,14 @@ document.addEventListener("DOMContentLoaded", function () {
           if (!emailPattern.test(email)) {
             alert("Enter valid Email Address");
           } else {
+            //************************************** */
             var flits = {};
+            if (localStorage.getItem("flits")) {
+              flits = JSON.parse(localStorage.getItem("flits"));
+              console.log("Having");
+            } else {
+              console.log("NOT HACING");
+            }
             flits.flits_customer_email = email;
             flits.flits_wishlist_products = "table-clock";
             localStorage.setItem("flits", JSON.stringify(flits));

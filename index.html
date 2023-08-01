@@ -33,11 +33,11 @@
                         <div class="p-3">
                             <span class="row text-white" style="font-size: small;"><small><b><a class="text-white"
                                             href="./login.html">Sign in</a></b> or <b><a class="text-white"
-                                            href="#">Create an
+                                            href="./register.html">Create an
                                             Account</a></b></small></span>
                             <div class="d-flex justify-content-end mt-2">
                                 <form class="input-group div1 border m-1" style="max-width: 50% !important;">
-                                    <input type="text" class="form-control rounded-0 border-0"
+                                    <input type="text" class="form-control search rounded-0 border-0"
                                         style="background-color: transparent; color: white;"
                                         placeholder="Search for...">
                                     <button type="button" class="btn btn-outline-secondary rounded-0 border-0">
@@ -50,7 +50,7 @@
                                 </form>
                                 <div class="div1 border m-1 me-0">
                                     <button type="button div1 border"
-                                        class="text-white btn btn-outline-secondary rounded-0 border-0 ">
+                                        class="cart text-white btn btn-outline-secondary rounded-0 border-0 " id="cart">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
                                             class="bi bi-cart" viewBox="0 0 16 16">
                                             <path
@@ -81,13 +81,21 @@
                     data-bs-target="#collapsibleNavbar">
                     <span class="navbar-toggler-icon"></span> Menu
                 </button>
-                <a class="navbar-brand" href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-cart"
+                <button class="navbar-brand bg-transparent border-0" href="#" id="cart">
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-cart"
                         viewBox="0 0.5 16 16">
                         <path
                             d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                    </svg> CART
-                </a>
+                    </svg> CART -->
+                    <button type="button div1 border"
+                        class="cart text-white btn btn-outline-secondary rounded-0 border-0 " id="cart2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-cart"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                        </svg> CART
+                    </button>
+                </button>
                 <div class="collapse navbar-collapse div1" id="collapsibleNavbar"
                     style="min-height: 90vh; overflow: hidden;">
                     <ul class="navbar-nav">
@@ -120,7 +128,7 @@
                             <a class="nav-link text-white" href="./login.html">SIGN IN</a>
                         </li>
                         <li class="nav-item  border-bottom py-2 ps-3" style="color: #3a00be;">
-                            <a class="nav-link text-white" href="#">CREATE AN ACCOUNT</a>
+                            <a class="nav-link text-white" href="./register.html">CREATE AN ACCOUNT</a>
                         </li>
                     </ul>
                 </div>
@@ -743,6 +751,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <script src="./cart.js"></script>
     <script src="./wishlist.js"></script>
     <div class="d-flex justify-content-center">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56.24 50" style="width: 80px;">
