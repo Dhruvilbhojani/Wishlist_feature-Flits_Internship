@@ -27,7 +27,7 @@ if (addToCart) {
   });
 }
 
-function cartFunction() {
+async function cartFunction() {
   var flits;
   if (localStorage) {
     var flits = JSON.parse(localStorage.getItem("flits"));
@@ -141,6 +141,7 @@ function cartFunction() {
   var total = document.createElement("div");
   total.classList.add("text-gray", "text-end");
 
+  // SUB TOTAL INITIALIZING
   if (flits) {
     if (flits.flits_product_count == null) {
       total.innerHTML == "0";
@@ -158,28 +159,56 @@ function cartFunction() {
   tax.classList.add("text-gray", "fst-italic", "fw-medium", "text-end");
   tax.innerHTML = "Taxes and shipping calculated at checkout";
 
+  // SELECT DISCOUNTS
   var btns = document.createElement("div");
   btns.classList.add("d-flex", "mt-4");
   var select = document.createElement("select");
   select.classList.add("form-select", "rounded-0");
-  //   select.style.height = "3rem";
   var option1 = document.createElement("option");
   option1.setAttribute("value", "1");
   option1.innerHTML = "Select option to use store Credits:";
   var option2 = document.createElement("option");
   option2.setAttribute("value", "2");
+  var sValue = 0,
+    credits = 0,
+    percentage = 0;
+
+  try {
+    const response = await fetch("https://tempapi.proj.me/api/UYEpW_QSK");
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    credits = data.flits_total_store_credits;
+    percentage = data.flits_discount_percentage;
+    // console.log(data.flits_total_store_credits);
+  } catch (error) {
+    console.error("Error fetching data from API:", error);
+  }
+  select.addEventListener("change", async function () {
+    sValue = select.value; //selection value
+    if (sValue == 2) {
+      var usableCredits = (450 * flits.flits_product_count * percentage) / 100;
+      if (usableCredits > credits) usableCredits = credits;
+      total.innerHTML =
+        "<p>Subtotal <b>Rs. " +
+        (450.0 * flits.flits_product_count - usableCredits).toFixed(2) +
+        "</b></p>";
+    }
+  });
+  console.log("dvcf" + credits);
 
   if (flits) {
     if (flits.flits_product_count == null) {
       // txt.innerHTML = "0";
     } else {
+      var usableCredits = (450 * flits.flits_product_count * percentage) / 100;
+      if (usableCredits > credits) usableCredits = credits;
+      console.log(usableCredits);
+      console.log(credits);
       option2.innerHTML =
-        "You can use Rs." +
-        (450 * flits.flits_product_count * 15) / 100 +
-        " credit out of Rs. 1,800.96";
+        "You can use Rs." + usableCredits + " credit out of Rs. " + credits;
     }
-  } else {
-    // txt.innerHTML = "0";
   }
 
   var checkoutBtn = document.createElement("button");
@@ -198,29 +227,47 @@ function cartFunction() {
       modalContent.appendChild(modalBody);
     }
     txt.innerHTML = flits.flits_product_count;
-    total.innerHTML =
-      "<p>Subtotal <b>Rs. " +
-      (450.0 * flits.flits_product_count).toFixed(2) +
-      "</b></p>";
+    var usableCredits = (450 * flits.flits_product_count * percentage) / 100;
+    if (usableCredits > credits) usableCredits = credits;
+    console.log(usableCredits);
+    if (sValue == 2) {
+      total.innerHTML =
+        "<p>Subtotal <b>Rs. " +
+        (450.0 * flits.flits_product_count - usableCredits).toFixed(2) +
+        "</b></p>";
+    } else {
+      total.innerHTML =
+        "<p>Subtotal <b>Rs. " +
+        (450.0 * flits.flits_product_count).toFixed(2) +
+        "</b></p>";
+    }
     option2.innerHTML =
-      "You can use Rs." +
-      (450 * flits.flits_product_count * 15) / 100 +
-      " credit out of Rs. 1,800.96";
+      "You can use Rs." + usableCredits + " credit out of Rs. " + credits;
     localStorage.setItem("flits", JSON.stringify(flits));
   });
   cp.addEventListener("click", function () {
     flits.flits_product_count++;
     txt.innerHTML = flits.flits_product_count;
-    total.innerHTML =
-      "<p>Subtotal <b>Rs. " +
-      (450.0 * flits.flits_product_count).toFixed(2) +
-      "</b></p>";
+    var usableCredits = (450 * flits.flits_product_count * percentage) / 100;
+    if (usableCredits > credits) usableCredits = credits;
+    console.log(usableCredits);
+
+    if (sValue == 2) {
+      total.innerHTML =
+        "<p>Subtotal <b>Rs. " +
+        (450.0 * flits.flits_product_count - usableCredits).toFixed(2) +
+        "</b></p>";
+    } else {
+      total.innerHTML =
+        "<p>Subtotal <b>Rs. " +
+        (450.0 * flits.flits_product_count).toFixed(2) +
+        "</b></p>";
+    }
     option2.innerHTML =
-      "You can use Rs." +
-      (450 * flits.flits_product_count * 15) / 100 +
-      " credit out of Rs. 1,800.96";
+      "You can use Rs." + usableCredits + " credit out of Rs. " + credits;
     localStorage.setItem("flits", JSON.stringify(flits));
   });
+
   remove.addEventListener("click", function () {
     flits.flits_product_count = 0;
     localStorage.setItem("flits", JSON.stringify(flits));
@@ -249,7 +296,6 @@ function cartFunction() {
   modalContent.appendChild(modalHeader);
   if (flits) {
     if (flits.flits_product_count > 0 && flits.flits_product_count !== null) {
-
       modalContent.appendChild(modalBody);
       modalContent.appendChild(modalFooter);
     } else {
