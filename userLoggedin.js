@@ -27,8 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
       userDetails.innerHTML = "";
       p.appendChild(a);
       userDetails.appendChild(p);
-      var createAccount = document.getElementById("createAccount");
       alert("create");
+      var createAccount = document.getElementById("createAccount");
       createAccount.classList.add("d-none");
       document.getElementById("signIn").classList.add("d-none");
       document.getElementById("profile").classList.remove("d-none");
