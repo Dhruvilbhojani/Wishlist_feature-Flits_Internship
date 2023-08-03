@@ -7,14 +7,11 @@ document.addEventListener("DOMContentLoaded", function () {
                                         class="text-white" href="./login.html">Sign
                                         in</a></b> or <b><a class="text-white" href="./register.html">Create an
                                         Account</a></b></small>`;
-    document.getElementById("logout").setAttribute("id", "createAccount");
-    document.querySelector("#createAccount a").innerHTML = "CREATE AN ACCOUNT";
-    document
-      .querySelector("#createAccount a")
-      .setAttribute("href", "./register.html");
-    document.getElementById("profile").setAttribute("id", "singIN");
-    document.querySelector("#signIN a").innerHTML = "SIGN IN";
-    document.querySelector("#signIN a").setAttribute("href", "./login.html");
+    document.getElementById("createAccount").classList.remove("d-none");
+    document.getElementById("signIn").classList.remove("d-none");
+    document.getElementById("profile").classList.add("d-none");
+    document.getElementById("logout").classList.add("d-none");
+    window.location.href = './login.html'
   };
   if (localStorage) {
     var uname = JSON.parse(localStorage.getItem("profile")).username;
@@ -30,16 +27,10 @@ document.addEventListener("DOMContentLoaded", function () {
       userDetails.innerHTML = "";
       p.appendChild(a);
       userDetails.appendChild(p);
-      var createAccount = document.getElementById("createAccount");
-      createAccount.setAttribute("id", "logout");
-      var createAccountA = document.querySelector("#logout a");
-      createAccountA.innerHTML = "LOGOUT";
-      createAccountA.setAttribute("href", "./index.html");
-      var profile = document.getElementById("signIn");
-      profile.setAttribute("id", "profile");
-      var profileA = document.querySelector("#profile a");
-      profileA.innerHTML = "VIEW PROFILE";
-      profileA.setAttribute("href", "#");
+      document.getElementById("createAccount").classList.add("d-none");
+      document.getElementById("signIn").classList.add("d-none");
+      document.getElementById("profile").classList.remove("d-none");
+      document.getElementById("logout").classList.remove("d-none");
     }
     userDetails.classList.add("justify-content-end", "m-2");
 
