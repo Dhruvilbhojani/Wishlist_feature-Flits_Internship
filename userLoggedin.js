@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // alert(uname);
     if (uname) {
       userDetails.innerHTML = "";
-      alert("create");
+      console.log("create");
       p.appendChild(a);
       userDetails.appendChild(p);
       var createAccount = document.getElementById("createAccount");
