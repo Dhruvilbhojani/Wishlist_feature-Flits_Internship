@@ -16,7 +16,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script type="text/javascript">
         var verifyCallback = function (response) {
-            console.log(response);
+            var btn = document.getElementById('submit');
+            btn.removeAttribute('disabled');
+            btn.style.backgroundColor = "#2e94b1";
         };
         var onloadCallback = function () {
             grecaptcha.render('example3', {
@@ -153,12 +155,13 @@
                 To continue, let us know you're not a robot.
             </p>
 
-            <form action="./challange.html" id="loginForm">
+            <form action="./login.html" id="loginForm" method="GET">
                 <center>
                     <div class="float-center" id="example3"></div>
                 </center>
-                <button type="submit" class="px-3 py-2 mt-3 border-0 text-white"
-                    style="background-color: #2e94b1; font-size: 0.8rem; border-radius: 3px;">SUBMIT</button><br>
+                <button type="button" class="px-3 py-2 mt-3 border-0 text-white disabled" id="submit"
+                    style="background-color: #868686; font-size: 0.8rem; border-radius: 3px;"
+                    disabled>SUBMIT</button><br>
             </form>
         </div>
     </div>
@@ -341,6 +344,33 @@
     <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
     </script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            var form = document.getElementById('loginForm');
+            var btn = document.getElementById('submit');
+
+            btn.addEventListener("click", async function (event) {
+
+                if (localStorage) {
+                    var _grecaptcha = await localStorage.getItem('_grecaptcha');
+                    if (_grecaptcha) {
+                        try {
+                            const res = await fetch('https://tempapi.proj.me/api/t5OxAjeQx');
+                            const data = await res.json();
+                            const profile = JSON.parse(localStorage.getItem("profile"));
+                            profile.username = data.username;
+                            localStorage.setItem("profile", JSON.stringify(profile));
+                            const currentHost = window.location.origin;
+                            const redirectPath = "/";
+                            window.location.href = currentHost + redirectPath;
+                        } catch (err) {
+                            console.log(err);
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

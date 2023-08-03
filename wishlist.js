@@ -388,9 +388,14 @@ document.addEventListener("DOMContentLoaded", function () {
           btn.innerHTML = svgFilledHeart + "ADDED TO WISHLIST";
 
           try {
-            await fetch("https://tempapi.proj.me/api/QGs7adpr5")
-              .then((res) => console.log(res))
-              .catch((err) => console.log("Errorrrrr"));
+            const response = await fetch(
+              "https://tempapi.proj.me/api/QGs7adpr5"
+            );
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            console.log(data);
           } catch (error) {
             console.error("Error sending data to API:", error);
           }
