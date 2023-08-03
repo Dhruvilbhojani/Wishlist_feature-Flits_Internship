@@ -101,20 +101,20 @@ document.addEventListener("DOMContentLoaded", function () {
       parentElement.appendChild(btn);
     }
 
-    btn.addEventListener("click", async function () {
-      var flits = JSON.parse(localStorage.getItem("flits"));
-      if (flits !== null) {
-        if (!(flits.flits_customer_email == null)) {
-          btn.classList.add("email-added-once");
-        }
-        if (flits.flits_wishlist_products == "table-clock") {
-          btn.classList.add("added");
-          btn.style.backgroundColor = "#230268";
-          btn.classList.remove("text-black");
-          btn.classList.add("text-white", "added");
-          btn.innerHTML = svgFilledHeart + "ADDED TO WISHLIST";
-        }
+    var flits = JSON.parse(localStorage.getItem("flits"));
+    if (flits !== null) {
+      if (!(flits.flits_customer_email == null)) {
+        btn.classList.add("email-added-once");
       }
+      if (flits.flits_wishlist_products == "table-clock") {
+        btn.classList.add("added");
+        btn.style.backgroundColor = "#230268";
+        btn.classList.remove("text-black");
+        btn.classList.add("text-white", "added");
+        btn.innerHTML = svgFilledHeart + "ADDED TO WISHLIST";
+      }
+    }
+    btn.addEventListener("click", async function () {
       if (
         !btn.classList.contains("email-added-once") &&
         !btn.classList.contains("added")
