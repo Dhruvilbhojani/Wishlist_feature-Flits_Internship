@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("signIn").classList.remove("d-none");
     document.getElementById("profile").classList.add("d-none");
     document.getElementById("logout").classList.add("d-none");
-    window.location.href = './login.html'
+    window.location.href = "./login.html";
   };
   if (localStorage) {
     var uname = JSON.parse(localStorage.getItem("profile")).username;
@@ -27,7 +27,9 @@ document.addEventListener("DOMContentLoaded", function () {
       userDetails.innerHTML = "";
       p.appendChild(a);
       userDetails.appendChild(p);
-      document.getElementById("createAccount").classList.add("d-none");
+      var createAccount = document.getElementById("createAccount");
+      createAccount.classList.add("d-none");
+      alert("create");
       document.getElementById("signIn").classList.add("d-none");
       document.getElementById("profile").classList.remove("d-none");
       document.getElementById("logout").classList.remove("d-none");
