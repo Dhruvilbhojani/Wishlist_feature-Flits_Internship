@@ -30,12 +30,16 @@ document.addEventListener("DOMContentLoaded", function () {
       userDetails.innerHTML = "";
       p.appendChild(a);
       userDetails.appendChild(p);
-      document.getElementById("createAccount").setAttribute("id", "logout");
-      document.querySelector("#logout a").innerHTML = "LOGOUT";
-      document.querySelector("#logout a").setAttribute("href", "./index.html");
-      document.getElementById("signIn").setAttribute("id", "profile");
-      document.querySelector("#profile a").innerHTML = "VIEW PROFILE";
-      document.querySelector("#profile a").setAttribute("href", "#");
+      var createAccount = document.getElementById("createAccount");
+      createAccount.setAttribute("id", "logout");
+      var createAccountA = document.querySelector("#logout a");
+      createAccountA.innerHTML = "LOGOUT";
+      createAccountA.setAttribute("href", "./index.html");
+      var profile = document.getElementById("signIn");
+      profile.setAttribute("id", "profile");
+      var profileA = document.querySelector("#profile a");
+      profileA.innerHTML = "VIEW PROFILE";
+      profileA.setAttribute("href", "#");
     }
     userDetails.classList.add("justify-content-end", "m-2");
 
