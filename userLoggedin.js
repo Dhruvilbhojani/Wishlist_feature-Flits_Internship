@@ -28,8 +28,8 @@ document.addEventListener("DOMContentLoaded", function () {
       p.appendChild(a);
       userDetails.appendChild(p);
       var createAccount = document.getElementById("createAccount");
-      createAccount.classList.add("d-none");
       alert("create");
+      createAccount.classList.add("d-none");
       document.getElementById("signIn").classList.add("d-none");
       document.getElementById("profile").classList.remove("d-none");
       document.getElementById("logout").classList.remove("d-none");
