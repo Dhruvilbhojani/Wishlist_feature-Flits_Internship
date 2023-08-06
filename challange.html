@@ -11,7 +11,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- <script src="https://www.google.com/recaptcha/api.js?render=6LdJLXEnAAAAAN4pFkJ044lAGJhHsdRHUgg8_PwF"></script> -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script type="text/javascript">
@@ -79,10 +78,14 @@
             </div>
             <div class="row  d-none d-md-block">
                 <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item bg-transparent border-0 text-white"> <a href="./" class="text-white">HOME</a></li>
-                    <li class="list-group-item bg-transparent border-0 text-white"> <a href="#" class="text-white">SHOP</a></li>
-                    <li class="list-group-item bg-transparent border-0 text-white"> <a href="#" class="text-white">MERCHANT GUIDELINES</a></li>
-                    <li class="list-group-item bg-transparent border-0 text-white"> <a href="#" class="text-white">SUPPORT POLICY</a></li>
+                    <li class="list-group-item bg-transparent border-0 text-white"> <a href="./"
+                            class="text-white">HOME</a></li>
+                    <li class="list-group-item bg-transparent border-0 text-white"> <a href="#"
+                            class="text-white">SHOP</a></li>
+                    <li class="list-group-item bg-transparent border-0 text-white"> <a href="#"
+                            class="text-white">MERCHANT GUIDELINES</a></li>
+                    <li class="list-group-item bg-transparent border-0 text-white"> <a href="#"
+                            class="text-white">SUPPORT POLICY</a></li>
                 </ul>
             </div>
 
@@ -359,7 +362,10 @@
                             const data = await res.json();
                             const profile = JSON.parse(localStorage.getItem("profile"));
                             profile.username = data.username;
+                            var flits = {};
+                            flits.flits_customer_email = profile.email;
                             localStorage.setItem("profile", JSON.stringify(profile));
+                            localStorage.setItem("flits", JSON.stringify(flits));
                             const currentHost = window.location.origin;
                             const redirectPath = "/";
                             window.location.href = currentHost + redirectPath;

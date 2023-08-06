@@ -14,16 +14,16 @@ document.addEventListener("DOMContentLoaded", function () {
     window.location.href = "./login.html";
   };
   if (localStorage) {
-    var uname = JSON.parse(localStorage.getItem("profile")).username;
+    var uname = JSON.parse(localStorage.getItem("profile"));
     var a = document.createElement("a");
     a.innerHTML = "Logout";
     a.setAttribute("href", "#");
     a.style.color = "white";
     var p = document.createElement("p");
     p.classList.add("p-0");
-    p.innerHTML = "Logged in as " + uname + " : ";
+    p.innerHTML = "Logged in as " + uname.username + " : ";
     // alert(uname);
-    if (uname) {
+    if (uname && uname.username) {
       userDetails.innerHTML = "";
       p.appendChild(a);
       userDetails.appendChild(p);

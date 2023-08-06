@@ -28,7 +28,7 @@ if (addToCart) {
 }
 
 async function cartFunction() {
-  var flits;
+  var flits = {};
   if (localStorage) {
     var flits = JSON.parse(localStorage.getItem("flits"));
   }
