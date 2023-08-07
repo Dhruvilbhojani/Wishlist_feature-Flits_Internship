@@ -6,6 +6,8 @@
     <!-- Include the Google Sign-In API script -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <!-- Replace YOUR_CLIENT_ID with your actual Google client ID -->
+    <meta name="Cross-Origin-Opener-Policy" content="same-origin-allow-popups">
+    <meta name="Cross-Origin-Embedder-Policy" content="require-corp">
     <meta name="google-signin-client_id"
         content="306133261413-etjm76sa9er365cj9ueipu0eagacl3kv.apps.googleusercontent.com">
 </head>
@@ -13,7 +15,7 @@
 <body>
     <!-- Place where the sign-in button will be rendered -->
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
-    <div class="g-signin2" data-onsuccess="onSignIn" data-clientid="306133261413-etjm76sa9er365cj9ueipu0eagacl3kv.apps.googleusercontent.com"></div>
+    <br><br><div class="g-signin2" data-onsuccess="onSignIn" data-clientid="306133261413-etjm76sa9er365cj9ueipu0eagacl3kv.apps.googleusercontent.com"></div>
 
     <script>
         // This function is called when the user signs in successfully
