@@ -1,29 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Sign-In</title>
+    <title>Google Sign-In Example</title>
+    <!-- Include the Google Sign-In API script -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="Cross-Origin-Opener-Policy" content="same-origin-allow-popups">
+    <!-- Replace YOUR_CLIENT_ID with your actual Google client ID -->
     <meta name="google-signin-client_id"
         content="306133261413-etjm76sa9er365cj9ueipu0eagacl3kv.apps.googleusercontent.com">
 </head>
 
 <body>
-    2
+    <!-- Place where the sign-in button will be rendered -->
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <div class="g-signin2" data-onsuccess="onSignIn" data-clientid="306133261413-etjm76sa9er365cj9ueipu0eagacl3kv.apps.googleusercontent.com"></div>
 
     <script>
+        // This function is called when the user signs in successfully
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
-            var email = profile.getEmail();
-            // The email address is returned as a promise.
-            // Use the then() method to resolve the promise.
-            email.then(function (email) {
-                console.log("User's email:", email);
-            });
+            console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+            console.log("Name: " + profile.getName());
+            console.log("Image URL: " + profile.getImageUrl());
+            console.log("Email: " + profile.getEmail()); // This is the user's email, only use if the app requires it.
+
+            // You can implement your own logic here to handle the user's data.
+            // For example, you can send the user's information to your server for further processing.
+            // Make sure to secure your server-side code and handle the user data responsibly.
         }
     </script>
 </body>
