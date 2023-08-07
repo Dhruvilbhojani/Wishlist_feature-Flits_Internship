@@ -14,10 +14,19 @@
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
     <script>
+        // function onSignIn(googleUser) {
+        //     var profile = googleUser.getBasicProfile();
+        //     var email = profile.getEmail();
+        //     console.log("User's email:", email);
+        // }
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
             var email = profile.getEmail();
-            console.log("User's email:", email);
+            // The email address is returned as a promise.
+            // Use the then() method to resolve the promise.
+            email.then(function (email) {
+                console.log("User's email:", email);
+            });
         }
     </script>
 </body>
