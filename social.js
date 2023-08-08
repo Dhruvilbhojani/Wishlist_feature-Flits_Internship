@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
   var socialDiv = document.createElement("div");
   socialDiv.classList.add(
     "social",
@@ -34,7 +34,27 @@ document.addEventListener("DOMContentLoaded", function () {
   btnGroupFB.appendChild(btnI2);
 
   //Google
+  var googleSignIn = document.createElement("div");
+  googleSignIn.classList.add("g-signin2", "col-md-2", "m-2", "p-0", "d-flex");
+  googleSignIn.setAttribute("data-onsuccess", "onSignIn");
+
+  function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log("Name: " + profile.getName());
+    console.log("Image URL: " + profile.getImageUrl());
+    console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
+  }
+  var script = document.createElement("script");
+  script.setAttribute("src", "https://apis.google.com/js/platform.js");
+  script.setAttribute("async", "");
+  script.setAttribute("defer", "");
+  document.childNodes[1].appendChild(script);
+
   var btnGroupGoogle = document.createElement("div");
+  btnGroupGoogle.classList.add("g-signin2", "col-md-2", "m-2", "p-0", "d-flex");
+  btnGroupGoogle.setAttribute("data-onsuccess", "onSignIn");
+  
   btnGroupGoogle.classList.add("col-md-2", "m-2", "p-0", "btn-group");
   btnGroupGoogle.style.width = "150px";
   btnGroupGoogle.setAttribute("role", "group");
