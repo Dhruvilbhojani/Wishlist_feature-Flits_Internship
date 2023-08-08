@@ -1,34 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Google Sign-In Example</title>
-    <!-- Include the Google Sign-In API script -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <!-- Replace YOUR_CLIENT_ID with your actual Google client ID -->
-    <meta name="Cross-Origin-Opener-Policy" content="same-origin-allow-popups">
-    <meta name="Cross-Origin-Embedder-Policy" content="require-corp">
-    <meta name="google-signin-client_id"
-        content="306133261413-etjm76sa9er365cj9ueipu0eagacl3kv.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="306133261413-etjm76sa9er365cj9ueipu0eagacl3kv.apps.googleusercontent.com">
 </head>
 
 <body>
-    <!-- Place where the sign-in button will be rendered -->
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
-    <br><br><div class="g-signin2" data-onsuccess="onSignIn" data-clientid="306133261413-etjm76sa9er365cj9ueipu0eagacl3kv.apps.googleusercontent.com"></div>
-
+    <a href="#" onclick="signOut();">Sign out</a>
     <script>
-        // This function is called when the user signs in successfully
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
-            console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-            console.log("Name: " + profile.getName());
-            console.log("Image URL: " + profile.getImageUrl());
-            console.log("Email: " + profile.getEmail()); // This is the user's email, only use if the app requires it.
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+        }
 
-            // You can implement your own logic here to handle the user's data.
-            // For example, you can send the user's information to your server for further processing.
-            // Make sure to secure your server-side code and handle the user data responsibly.
+
+
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
         }
     </script>
 </body>
